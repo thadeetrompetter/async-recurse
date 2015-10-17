@@ -13,7 +13,7 @@ var counterFactory = function (step, data) {
             slice = data.slice(count, next);
             count = next;
         } else {
-            next = total - 1;
+            next = total;
             slice = data.slice(count, next);
             count = 0;
         }
