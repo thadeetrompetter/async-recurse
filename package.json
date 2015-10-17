@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve":"node ./server.js",
-    "main":"node ./index.js"
+    "test": "tape ./*.test.js | faucet",
+    "serve": "node ./server.js",
+    "main": "node ./index.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "faucet": "0.0.1",
+    "tape": "^4.2.1"
   }
 }
