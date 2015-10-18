@@ -5,8 +5,8 @@ var http = require('http'),
 
 function getItems(store, iterator, errorCallback) {
     var stash = store.slice(),
-        extractConversations = extractFromEach(stash, 'conversations'),
-        conversations = extractConversations();
+        extractConversations = extractFromEach('conversations'),
+        conversations = extractConversations(stash);
 
     requestData(function (history) {
         // TODO: in the pubnub history call, iterator needs to be configured to
@@ -77,8 +77,8 @@ function getHashByPropertyValue (property, collection) {
 }
 exports.getHashByPropertyValue = getHashByPropertyValue;
 
-function extractFromEach(collection, key) {
-    return function () {
+function extractFromEach(key) {
+    return function (collection) {
         var collector = [],
             len = collection.length,
             i = 0;
