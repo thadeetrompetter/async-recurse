@@ -14,27 +14,25 @@ function getItems(store, iterator, errorCallback) {
         iterator(conversations, history);
     }, errorCallback);
 }
-// TODO: add option to break out of conversations loop if as many results were
-// collected as there are items in retrieved history.
-// TODO: if call returns fewer than N records, prevent additional calls
+// TODO: history threshold: if call returns fewer than N records, prevent
+// additional calls
 function iteratorFactory(success, error) {
     var count = 0;
     return function iterateConversations(conversations, history) {
         var historyByChannel = getHashByPropertyValue('key', history),
             hits = 0;
-        conversations.forEach(function (conversation, index) {
-            var channel = conversation.channel;
+        for(var i = 0; i < conversations.length; i++){
+            var conversation = conversations[i],
+                channel = conversation.channel;
             if(historyByChannel.hasOwnProperty(channel)){
                 conversation.timestamp = historyByChannel[channel].timestamp;
                 count++;
                 hits++;
             }
             if(hits === history.length){
-                // this does not work in a foreach, re-write to for loop
-                // to use 'break'
-                return false;
+                break;
             }
-        });
+        }
         if(count === conversations.length){
             return success(conversations);
         }
