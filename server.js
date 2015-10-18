@@ -1,7 +1,8 @@
 var express = require('express'),
     data = require('./data2.json');
 
-var app = express();
+var app = express(),
+    step = 2;
 
 var counterFactory = function (step, data) {
     var count = 0,
@@ -20,7 +21,7 @@ var counterFactory = function (step, data) {
         return slice;
     };
 };
-var counter = counterFactory(2, data);
+var counter = counterFactory(step, data);
 
 app.get('/', function(req, res) {
   res.send(counter());
