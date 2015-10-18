@@ -16,6 +16,7 @@ function getItems(store, iterator, errorCallback) {
 }
 // TODO: add option to break out of conversations loop if as many results were
 // collected as there are items in retrieved history.
+// TODO: if call returns fewer than N records, prevent additional calls
 function iteratorFactory(success, error) {
     var count = 0;
     return function iterateConversations(conversations, history) {
@@ -42,6 +43,13 @@ function iteratorFactory(success, error) {
         }, error);
     };
 }
+/**
+ * requestData is a stub for PUBNUB.history
+ *
+ * @param  {function} successCallback
+ * @param  {function} errorCallback
+ * @return {undefined}
+ */
 function requestData(successCallback, errorCallback) {
     return http.get({
         port: 3000
@@ -56,6 +64,7 @@ function requestData(successCallback, errorCallback) {
         res.on('error', errorCallback);
     });
 }
+// TODO: should go in helper
 function getHashByPropertyValue (property, collection) {
     var len = collection.length,
         i = 0,
@@ -77,6 +86,7 @@ function getHashByPropertyValue (property, collection) {
 }
 exports.getHashByPropertyValue = getHashByPropertyValue;
 
+// TODO: should go in helper
 function extractFromEach(key) {
     return function (collection) {
         var collector = [],
